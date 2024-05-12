@@ -17,6 +17,7 @@ const FeaturedFoodCard = ({ food }) => {
             <div className="flex justify-between">
               <div className="flex items-center bg-secondary px-4 py-1 rounded-full font-medium text-primary">
                 <IoMdPeople className="text-[18px]" /> <p className="text-[12px]">: {food_quantity}</p>
+                <p>hello</p>
               </div>
               <div className="flex items-center bg-secondary px-4 py-1 rounded-full font-medium text-primary">
                 <MdOutlineDateRange className="text-[18px]" /> <p className="text-[12px]">: {expire_date}</p>
