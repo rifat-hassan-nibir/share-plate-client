@@ -3,7 +3,7 @@ import axios from "axios";
 const AvailableFoods = () => {
   const getAvaiableFoods = async () => {
     try {
-      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/foods`);
+      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/foods?status=available`);
       console.log(data);
     } catch (error) {
       console.log(error);
