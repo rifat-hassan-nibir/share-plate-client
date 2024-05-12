@@ -17,7 +17,6 @@ const FeaturedFoodCard = ({ food }) => {
             <div className="flex justify-between">
               <div className="flex items-center bg-secondary px-4 py-1 rounded-full font-medium text-primary">
                 <IoMdPeople className="text-[18px]" /> <p className="text-[12px]">: {food_quantity}</p>
-                <p>hello</p>
               </div>
               <div className="flex items-center bg-secondary px-4 py-1 rounded-full font-medium text-primary">
                 <MdOutlineDateRange className="text-[18px]" /> <p className="text-[12px]">: {expire_date}</p>
@@ -37,9 +36,7 @@ const FeaturedFoodCard = ({ food }) => {
             <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <img className="size-10 rounded-full" src={donator_details.donator_image} alt="Avatar" />
-                <a href="#" className="mx-2 font-semibold text-gray-700 dark:text-gray-200" tabIndex="0" role="link">
-                  {donator_details.name}
-                </a>
+                <p className="mx-2 font-semibold text-gray-700 dark:text-gray-200">{donator_details.name}</p>
               </div>
               <div className="flex items-center bg-secondary px-4 py-1 rounded-full font-medium text-primary">
                 <IoLocationOutline classNa />

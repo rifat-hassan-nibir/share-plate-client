@@ -19,6 +19,7 @@ const Home = () => {
   // Tanstack Query
   const { data: featuredFoods = [], isPending, isError, error } = useQuery({ queryKey: ["featuredFoods"], queryFn: () => getFoodData() });
 
+  // Show loader when data is in loading state
   if (isPending) {
     return (
       <div className="flex justify-center items-center h-[80vh]">
@@ -27,6 +28,7 @@ const Home = () => {
     );
   }
 
+  // Show error
   if (isError) {
     console.log(isError, error);
     return (
@@ -45,7 +47,7 @@ const Home = () => {
       {/* Show Featured Foods */}
       <div className="px-4 lg:px-0 lg:py-[100px] py-[50px] bg-accent">
         <h1 className="text-center font-bold text-[22px] lg:text-[36px] lg:mb-[50px] mb-[25px]">Featured Foods</h1>
-        <div className="container mx-auto grid lg:grid-cols-3 grid-cols-1 gap-[32px]">
+        <div className="container mx-auto grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-[32px]">
           {featuredFoods.map((food, index) => (
             <FeaturedFoodCard food={food} key={index}></FeaturedFoodCard>
           ))}
@@ -56,7 +58,7 @@ const Home = () => {
             type="button"
             className="py-3 px-4 mt-[40px] lg:mt-[80px] inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-primary text-white transition-all hover:bg-secondary hover:text-black disabled:opacity-50 disabled:pointer-events-none"
           >
-            Show All Avaiable Foods
+            <button>Show All Avaiable Foods</button>
           </Link>
         </div>
       </div>
