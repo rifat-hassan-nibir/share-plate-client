@@ -6,9 +6,9 @@ import { GrStatusGood } from "react-icons/gr";
 import { Link } from "react-router-dom";
 
 const FeaturedFoodCard = ({ food }) => {
-  const { food_image, food_name, food_quantity, expire_date, additional_note, pickup_location, food_status, donator_details } = food;
+  const { _id, food_image, food_name, food_quantity, expire_date, additional_note, pickup_location, food_status, donator_details } = food;
   return (
-    <Link to="/food-details">
+    <Link to={`/food-details/${_id}`}>
       <div className="max-w-2xl overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
         <img className="object-cover w-full h-64" src={food_image} alt="Article" />
 
