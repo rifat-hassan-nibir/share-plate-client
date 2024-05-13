@@ -1,6 +1,8 @@
 import axios from "axios";
 import FeaturedFoodCard from "../Home/FeaturedFoodCard";
 import { useQuery } from "@tanstack/react-query";
+import PageHeader from "../../Components/PageHeader";
+import Gap from "../../Components/Gap";
 
 const AvailableFoods = () => {
   // Get the data of available food using axios
@@ -19,7 +21,7 @@ const AvailableFoods = () => {
     isPending,
     isError,
     error,
-  } = useQuery({ queryKey: ["featuredFoods"], queryFn: () => getAvailableFoods() });
+  } = useQuery({ queryKey: ["availableFoods"], queryFn: () => getAvailableFoods() });
 
   // Show loader when data is in loading state
   if (isPending) {
@@ -42,10 +44,18 @@ const AvailableFoods = () => {
 
   return (
     <div className="container mx-auto">
-      <h1>Available Foods</h1>
-      {availableFoods.map((food) => (
-        <FeaturedFoodCard food={food} key={food._id}></FeaturedFoodCard>
-      ))}
+      {/* Page Title */}
+      <PageHeader pageTitle={"Available Foods"}></PageHeader>
+      <Gap></Gap>
+
+      {/* Available Foods Grid */}
+      <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-[32px]">
+        {availableFoods.map((food) => (
+          <FeaturedFoodCard food={food} key={food._id}></FeaturedFoodCard>
+        ))}
+      </div>
+
+      <Gap></Gap>
     </div>
   );
 };
