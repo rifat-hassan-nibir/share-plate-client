@@ -7,19 +7,23 @@ import toast from "react-hot-toast";
 const RequestFoodModal = ({ id }) => {
   const { user } = useContext(AuthContext);
   const [foodData, setFoodData] = useState({});
-  const [noteValue, setNoteValue] = useState("");
   const [isDisabled, setIsDisabled] = useState(true);
 
   useEffect(() => {
-    axios(`${import.meta.env.VITE_API_URL}/foods/${id}`).then((data) => setFoodData(data.data));
-  }, [id]);
+    getSingleFoodData();
+  }, []);
 
-  const { food_name, food_image, food_quantity, pickup_location, expire_date, food_status, donator_details } = foodData;
+  const getSingleFoodData = async () => {
+    const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/foods/${id}`);
+    setFoodData(data);
+  };
+
+  const { _id, food_name, food_image, food_quantity, pickup_location, expire_date, food_status, donator_details } = foodData;
 
   // Updating additional_note field value
   const handleNoteValueChange = (e) => {
-    setNoteValue(e.target.value);
-    if (noteValue.length > 1) {
+    const additionalNoteLength = e.target.value.length;
+    if (additionalNoteLength > 0) {
       setIsDisabled(false);
     } else {
       setIsDisabled(true);
@@ -45,7 +49,7 @@ const RequestFoodModal = ({ id }) => {
             {/* if there is a button in form, it will close the modal */}
             <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
           </form>
-          <h3 className="font-bold text-lg">Request Food</h3>
+          <h3 className="font-bold text-lg">Request Food (I.D: {_id})</h3>
 
           {/* Form */}
 
@@ -166,18 +170,18 @@ const RequestFoodModal = ({ id }) => {
                 {/* Donator Information */}
                 <div>
                   <label htmlFor="donator-information" className="block mb-2 text-sm text-gray-700 font-medium dark:text-white">
-                    Donator&apos;s Information:
+                    Requester&apos;s Information:
                   </label>
                   <div className="grid grid-cols-5 gap-4 lg:gap-6 items-center">
                     <div className="col-span-1">
-                      <img className="inline-block size-[62px] rounded-full" src={donator_details?.donator_image} alt="Donator Image" />
+                      <img className="inline-block size-[62px] rounded-full" src={user?.photoURL} alt="Donator Image" />
                     </div>
                     <div className="col-span-5 lg:col-span-2">
                       <input
                         type="text"
                         name="donatorName"
                         id="donator-name"
-                        defaultValue={donator_details?.name}
+                        defaultValue={user?.displayName}
                         disabled
                         className=" py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                       />
@@ -187,7 +191,7 @@ const RequestFoodModal = ({ id }) => {
                         type="email"
                         name="donatorEmail"
                         id="donator-email"
-                        defaultValue={donator_details?.email}
+                        defaultValue={user?.email}
                         disabled
                         className=" py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                       />
