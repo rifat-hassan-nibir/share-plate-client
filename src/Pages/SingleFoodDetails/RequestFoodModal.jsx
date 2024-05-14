@@ -26,6 +26,17 @@ const RequestFoodModal = ({ id }) => {
     }
   };
 
+  // Form submit function
+  const handleFoodRequest = (e) => {
+    e.preventDefault();
+
+    if (donator_details.email === user.email) return toast.error("Donator cannot request his own added food");
+    const newAdditionalNote = e.target.additional_note.value;
+
+    console.log(newAdditionalNote);
+    console.log("form submitted");
+  };
+
   return (
     <div>
       <dialog id="my_modal_3" className="modal">
@@ -40,7 +51,7 @@ const RequestFoodModal = ({ id }) => {
 
           <div className="mt-12">
             {/* Form */}
-            <form>
+            <form onSubmit={handleFoodRequest}>
               <div className="grid gap-4 lg:gap-6">
                 {/* Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
