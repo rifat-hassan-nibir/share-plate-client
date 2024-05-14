@@ -1,5 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
-import logo from "../../public/share-plate-logo.png";
+import logo from "/share-plate-logo.png";
 import { SlUser } from "react-icons/sl";
 import { useContext } from "react";
 import { AuthContext } from "../Providers/AuthProvider";

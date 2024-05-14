@@ -1,4 +1,4 @@
-import logo from "../../public/share-plate-logo.png";
+import logo from "/share-plate-logo.png";
 
 const Footer = () => {
   return (
