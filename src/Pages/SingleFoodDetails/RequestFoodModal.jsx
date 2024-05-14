@@ -1,14 +1,21 @@
 /* eslint-disable react/prop-types */
-import { useContext } from "react";
-import { useForm } from "react-hook-form";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
+import { useForm } from "react-hook-form";
+import axios from "axios";
+import toast from "react-hot-toast";
 
-const RequestFoodModal = ({ foodData }) => {
+const RequestFoodModal = ({ id }) => {
   const { user } = useContext(AuthContext);
+  const [foodData, setFoodData] = useState({});
 
-  const { food_name, food_image, food_quantity, pickup_location, expire_date, food_status } = foodData;
+  useEffect(() => {
+    axios(`${import.meta.env.VITE_API_URL}/foods/${id}`).then((data) => setFoodData(data.data));
+  }, [id]);
 
-  //   React Hook Form
+  const { food_name, food_image, food_quantity, pickup_location, expire_date, food_status, donator_details } = foodData;
+
+  //   //   React Hook Form
   const {
     register,
     handleSubmit,
@@ -16,6 +23,7 @@ const RequestFoodModal = ({ foodData }) => {
   } = useForm();
 
   const onSubmit = (data) => {
+    if (donator_details.email === user.email) return toast.error("Donator cannot request their own added food");
     console.log(data);
   };
 
@@ -47,7 +55,7 @@ const RequestFoodModal = ({ foodData }) => {
                       defaultValue={food_name}
                       disabled
                       className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                      {...register("food_name", { required: true })}
+                      // {...register("food_name", { required: true })}
                     />
                   </div>
 
@@ -61,7 +69,7 @@ const RequestFoodModal = ({ foodData }) => {
                       defaultValue={food_image}
                       disabled
                       className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm  focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                      {...register("food_image", { required: true })}
+                      //   {...register("food_image", { required: true })}
                     />
                   </div>
                 </div>
@@ -79,7 +87,7 @@ const RequestFoodModal = ({ foodData }) => {
                       defaultValue={food_quantity}
                       disabled
                       className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm  focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                      {...register("food_quantity", { required: true })}
+                      //   {...register("food_quantity", { required: true })}
                     />
                   </div>
 
@@ -93,7 +101,7 @@ const RequestFoodModal = ({ foodData }) => {
                       defaultValue={pickup_location}
                       disabled
                       className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm  focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                      {...register("pickup_location", { required: true })}
+                      //   {...register("pickup_location", { required: true })}
                     />
                   </div>
                 </div>
@@ -110,7 +118,7 @@ const RequestFoodModal = ({ foodData }) => {
                       defaultValue={expire_date}
                       disabled
                       className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm  focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                      {...register("expire_date", { required: true })}
+                      //   {...register("expire_date", { required: true })}
                     />
                   </div>
 
@@ -123,7 +131,7 @@ const RequestFoodModal = ({ foodData }) => {
                       defaultValue={food_status}
                       disabled
                       className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm  focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                      {...register("food_status", { required: true })}
+                      //   {...register("food_status", { required: true })}
                     >
                       <option value="Available">Available</option>
                       <option value="Not Available">Not Available</option>
@@ -139,6 +147,7 @@ const RequestFoodModal = ({ foodData }) => {
                   <textarea
                     id="additional-note"
                     rows="4"
+                    required
                     className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm  focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                     {...register("additional_note", { required: true })}
                   ></textarea>
@@ -152,14 +161,14 @@ const RequestFoodModal = ({ foodData }) => {
                   </label>
                   <div className="grid grid-cols-5 gap-4 lg:gap-6 items-center">
                     <div className="col-span-1">
-                      <img className="inline-block size-[62px] rounded-full" src={user.photoURL} alt="Donator Image" />
+                      <img className="inline-block size-[62px] rounded-full" src={donator_details?.donator_image} alt="Donator Image" />
                     </div>
                     <div className="col-span-5 lg:col-span-2">
                       <input
                         type="text"
-                        name="donatorNmail"
-                        id="donator-nmail"
-                        defaultValue={user.displayName}
+                        name="donatorName"
+                        id="donator-name"
+                        defaultValue={donator_details?.name}
                         disabled
                         className=" py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                       />
@@ -169,7 +178,7 @@ const RequestFoodModal = ({ foodData }) => {
                         type="email"
                         name="donatorEmail"
                         id="donator-email"
-                        defaultValue={user.email}
+                        defaultValue={donator_details?.email}
                         disabled
                         className=" py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                       />
@@ -182,6 +191,7 @@ const RequestFoodModal = ({ foodData }) => {
               {/* Submit Button */}
               <div className="mt-6 grid">
                 <button
+                  onClick={() => document.getElementById("my_modal_3").close()}
                   type="submit"
                   className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-primary text-white hover:bg-secondary hover:text-black hover:transition-all disabled:opacity-50 disabled:pointer-events-none"
                 >

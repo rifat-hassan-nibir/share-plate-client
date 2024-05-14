@@ -98,7 +98,6 @@ const SingleFoodDetails = () => {
               {/* End List  */}
 
               {/*  */}
-              {/*  */}
               {/* Requst Food Modal */}
               <button
                 className="btn py-3 px-6 mt-[40px] lg:mt-[80px] inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-primary text-white transition-all hover:bg-secondary hover:text-black disabled:opacity-50 disabled:pointer-events-none"
@@ -106,7 +105,7 @@ const SingleFoodDetails = () => {
               >
                 Request Food
               </button>
-              <RequestFoodModal foodData={singleFoodData}></RequestFoodModal>
+              <RequestFoodModal id={id}></RequestFoodModal>
             </div>
           </div>
           {/* End Col  */}

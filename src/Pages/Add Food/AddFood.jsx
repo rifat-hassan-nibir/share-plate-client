@@ -31,7 +31,6 @@ const AddFood = () => {
       additional_note,
       donator_details: { donator_image: user.photoURL, name: user.displayName, email: user.email },
     };
-    console.log(addedFood);
 
     // Post added food to server
     try {
