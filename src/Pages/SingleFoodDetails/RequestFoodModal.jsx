@@ -1,13 +1,14 @@
 /* eslint-disable react/prop-types */
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
-import { useForm } from "react-hook-form";
 import axios from "axios";
 import toast from "react-hot-toast";
 
 const RequestFoodModal = ({ id }) => {
   const { user } = useContext(AuthContext);
   const [foodData, setFoodData] = useState({});
+  const [noteValue, setNoteValue] = useState("");
+  const [isDisabled, setIsDisabled] = useState(true);
 
   useEffect(() => {
     axios(`${import.meta.env.VITE_API_URL}/foods/${id}`).then((data) => setFoodData(data.data));
@@ -15,16 +16,14 @@ const RequestFoodModal = ({ id }) => {
 
   const { food_name, food_image, food_quantity, pickup_location, expire_date, food_status, donator_details } = foodData;
 
-  //   //   React Hook Form
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
-  const onSubmit = (data) => {
-    if (donator_details.email === user.email) return toast.error("Donator cannot request their own added food");
-    console.log(data);
+  // Updating additional_note field value
+  const handleNoteValueChange = (e) => {
+    setNoteValue(e.target.value);
+    if (noteValue.length > 1) {
+      setIsDisabled(false);
+    } else {
+      setIsDisabled(true);
+    }
   };
 
   return (
@@ -41,7 +40,7 @@ const RequestFoodModal = ({ id }) => {
 
           <div className="mt-12">
             {/* Form */}
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form>
               <div className="grid gap-4 lg:gap-6">
                 {/* Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
@@ -55,7 +54,6 @@ const RequestFoodModal = ({ id }) => {
                       defaultValue={food_name}
                       disabled
                       className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                      // {...register("food_name", { required: true })}
                     />
                   </div>
 
@@ -131,7 +129,7 @@ const RequestFoodModal = ({ id }) => {
                       defaultValue={food_status}
                       disabled
                       className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm  focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                      //   {...register("food_status", { required: true })}
+                      // {...register("food_status", { required: true })}
                     >
                       <option value="Available">Available</option>
                       <option value="Not Available">Not Available</option>
@@ -147,11 +145,11 @@ const RequestFoodModal = ({ id }) => {
                   <textarea
                     id="additional-note"
                     rows="4"
+                    name="additional_note"
                     required
+                    onChange={handleNoteValueChange}
                     className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm  focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                    {...register("additional_note", { required: true })}
                   ></textarea>
-                  {errors.additional_note && <span className="text-red-500">This field is required</span>}
                 </div>
 
                 {/* Donator Information */}
@@ -191,6 +189,7 @@ const RequestFoodModal = ({ id }) => {
               {/* Submit Button */}
               <div className="mt-6 grid">
                 <button
+                  disabled={isDisabled}
                   onClick={() => document.getElementById("my_modal_3").close()}
                   type="submit"
                   className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-primary text-white hover:bg-secondary hover:text-black hover:transition-all disabled:opacity-50 disabled:pointer-events-none"
