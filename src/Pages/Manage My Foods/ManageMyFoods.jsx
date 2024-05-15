@@ -20,7 +20,7 @@ const ManageMyFoods = () => {
     }
   };
 
-  //   Tanstack Query for loading single food data
+  //   Tanstack Query for loading food data
   const {
     data: foodsDataByEmail = [],
     isPending,
