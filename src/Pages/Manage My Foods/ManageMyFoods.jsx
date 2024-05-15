@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import PageHeader from "../../Components/PageHeader";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const ManageMyFoods = () => {
   const { user } = useContext(AuthContext);
@@ -48,15 +49,32 @@ const ManageMyFoods = () => {
   }
 
   const deleteFood = async (id) => {
-    try {
-      const { data } = await axios.delete(`${import.meta.env.VITE_API_URL}/delete-food/${id}`);
-      if (data.deletedCount > 0) {
-        toast.success("Food deleted");
-        refetch();
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#275B15",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const { data } = await axios.delete(`${import.meta.env.VITE_API_URL}/delete-food/${id}`);
+          if (data.deletedCount > 0) {
+            // Refetch Data for deleting data without reloading
+            refetch();
+          }
+        } catch (error) {
+          toast(error.message);
+        }
+        Swal.fire({
+          title: "Deleted!",
+          text: "Food Deleted",
+          icon: "success",
+        });
       }
-    } catch (error) {
-      toast(error.message);
-    }
+    });
   };
 
   return (
