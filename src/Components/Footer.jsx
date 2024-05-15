@@ -161,7 +161,7 @@ const Footer = () => {
           {/* End Col  */}
 
           <div>
-            <h4 className="text-xs font-semibold text-gray-900 uppercase dark:text-neutral-100">Developers</h4>
+            <h4 className="text-xs font-semibold text-gray-900 uppercase dark:text-neutral-100">Contact Information</h4>
 
             <div className="mt-3 grid space-y-3 text-sm">
               <p>
@@ -169,45 +169,17 @@ const Footer = () => {
                   className="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200"
                   href="#"
                 >
-                  Api
+                  Email: shareplate@gmail.com
                 </a>
-              </p>
-              <p>
-                <a
-                  className="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200"
-                  href="#"
-                >
-                  Status
-                </a>
-              </p>
-              <p>
-                <a
-                  className="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200"
-                  href="#"
-                >
-                  GitHub
-                </a>{" "}
-                <span className="inline text-blue-600 dark:text-blue-500">— New</span>
               </p>
             </div>
 
-            <h4 className="mt-7 text-xs font-semibold text-gray-900 uppercase dark:text-neutral-100">Industries</h4>
+            <h4 className="mt-7 text-xs font-semibold text-gray-900 uppercase dark:text-neutral-100">Address</h4>
 
             <div className="mt-3 grid space-y-3 text-sm">
               <p>
-                <a
-                  className="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200"
-                  href="#"
-                >
-                  Financial Services
-                </a>
-              </p>
-              <p>
-                <a
-                  className="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200"
-                  href="#"
-                >
-                  Education
+                <a className="inline-flex gap-x-2 text-gray-600 hover:text-gray-800 dark:text-neutral-400 dark:hover:text-neutral-200">
+                  Uttara, Dhaka-1230, Bangladesh
                 </a>
               </p>
             </div>
