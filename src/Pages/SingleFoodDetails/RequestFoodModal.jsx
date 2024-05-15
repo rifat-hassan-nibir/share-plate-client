@@ -21,7 +21,7 @@ const RequestFoodModal = ({ id }) => {
   const { _id, food_name, food_image, food_quantity, pickup_location, expire_date, food_status, donator_details } = foodData;
 
   // Updating additional_note field value
-  const handleNoteValueChange = (e) => {
+  const handleNoteValueChange = async (e) => {
     const additionalNoteLength = e.target.value.length;
     if (additionalNoteLength > 0) {
       setIsDisabled(false);
@@ -33,9 +33,10 @@ const RequestFoodModal = ({ id }) => {
   // Form submit function
   const handleFoodRequest = (e) => {
     e.preventDefault();
+    const form = e.target;
 
     if (donator_details.email === user.email) return toast.error("Donator cannot request his own added food");
-    const newAdditionalNote = e.target.additional_note.value;
+    const newAdditionalNote = form.additional_note.value;
 
     console.log(newAdditionalNote);
     console.log("form submitted");
@@ -49,7 +50,7 @@ const RequestFoodModal = ({ id }) => {
             {/* if there is a button in form, it will close the modal */}
             <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
           </form>
-          <h3 className="font-bold text-lg">Request Food (I.D: {_id})</h3>
+          <h3 className="font-bold text-lg">Request Food</h3>
 
           {/* Form */}
 
@@ -91,19 +92,62 @@ const RequestFoodModal = ({ id }) => {
                 {/* Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
                   <div>
-                    <label htmlFor="food-quantity" className="block mb-2 text-sm text-gray-700 font-medium dark:text-white">
-                      Food Quantity
+                    <label htmlFor="food-id" className="block mb-2 text-sm text-gray-700 font-medium dark:text-white">
+                      Food ID
                     </label>
                     <input
-                      type="number"
-                      id="food-quantity"
-                      defaultValue={food_quantity}
+                      type="text"
+                      id="food-id"
+                      defaultValue={_id}
+                      name="food_id"
                       disabled
                       className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm  focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                      //   {...register("food_quantity", { required: true })}
                     />
                   </div>
 
+                  <div>
+                    <label htmlFor="request-date" className="block mb-2 text-sm text-gray-700 font-medium dark:text-white">
+                      Request Date
+                    </label>
+                    <input
+                      type="text"
+                      id="request-date"
+                      defaultValue={new Date().toLocaleDateString()}
+                      disabled
+                      className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm  focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                    />
+                  </div>
+                </div>
+
+                {/* Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
+                  <div>
+                    <label htmlFor="donator-name" className="block mb-2 text-sm text-gray-700 font-medium dark:text-white">
+                      Donator Name
+                    </label>
+                    <input
+                      type="text"
+                      id="donator-name"
+                      defaultValue={donator_details?.name}
+                      disabled
+                      className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm  focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="donator-email" className="block mb-2 text-sm text-gray-700 font-medium dark:text-white">
+                      Donator Email
+                    </label>
+                    <input
+                      type="email"
+                      id="donator-email"
+                      defaultValue={donator_details?.email}
+                      disabled
+                      className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm  focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                    />
+                  </div>
+
+                  {/* Pickupt Location */}
                   <div>
                     <label htmlFor="pickup-location" className="block mb-2 text-sm text-gray-700 font-medium dark:text-white">
                       Pickup Location
@@ -114,41 +158,21 @@ const RequestFoodModal = ({ id }) => {
                       defaultValue={pickup_location}
                       disabled
                       className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm  focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                      //   {...register("pickup_location", { required: true })}
                     />
                   </div>
-                </div>
 
-                {/* Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
+                  {/* Requester's Email */}
                   <div>
-                    <label htmlFor="expired-date" className="block mb-2 text-sm text-gray-700 font-medium dark:text-white">
-                      Expire Date
+                    <label htmlFor="user-email" className="block mb-2 text-sm text-gray-700 font-medium dark:text-white">
+                      User Email
                     </label>
                     <input
-                      type="date"
-                      id="expired-date"
-                      defaultValue={expire_date}
+                      type="email"
+                      id="user-email"
+                      defaultValue={user?.email}
                       disabled
                       className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm  focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                      //   {...register("expire_date", { required: true })}
                     />
-                  </div>
-
-                  <div>
-                    <label htmlFor="status" className="block mb-2 text-sm text-gray-700 font-medium dark:text-white">
-                      Status
-                    </label>
-                    <select
-                      id="status"
-                      defaultValue={food_status}
-                      disabled
-                      className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm  focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                      // {...register("food_status", { required: true })}
-                    >
-                      <option value="Available">Available</option>
-                      <option value="Not Available">Not Available</option>
-                    </select>
                   </div>
                 </div>
                 {/* End Grid  */}
@@ -165,38 +189,6 @@ const RequestFoodModal = ({ id }) => {
                     onChange={handleNoteValueChange}
                     className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm  focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                   ></textarea>
-                </div>
-
-                {/* Donator Information */}
-                <div>
-                  <label htmlFor="donator-information" className="block mb-2 text-sm text-gray-700 font-medium dark:text-white">
-                    Requester&apos;s Information:
-                  </label>
-                  <div className="grid grid-cols-5 gap-4 lg:gap-6 items-center">
-                    <div className="col-span-1">
-                      <img className="inline-block size-[62px] rounded-full" src={user?.photoURL} alt="Donator Image" />
-                    </div>
-                    <div className="col-span-5 lg:col-span-2">
-                      <input
-                        type="text"
-                        name="donatorName"
-                        id="donator-name"
-                        defaultValue={user?.displayName}
-                        disabled
-                        className=" py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                      />
-                    </div>
-                    <div className="col-span-5 lg:col-span-2">
-                      <input
-                        type="email"
-                        name="donatorEmail"
-                        id="donator-email"
-                        defaultValue={user?.email}
-                        disabled
-                        className=" py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                      />
-                    </div>
-                  </div>
                 </div>
               </div>
               {/* End Grid */}
