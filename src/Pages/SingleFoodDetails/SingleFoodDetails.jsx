@@ -57,7 +57,7 @@ const SingleFoodDetails = () => {
         {/* Grid  */}
         <div className="md:grid md:grid-cols-2 md:items-center md:gap-12 xl:gap-32">
           <div>
-            <img className="rounded-xl" src={food_image} />
+            <img className="rounded-xl" src={food_image} alt="food image" />
           </div>
           {/* End Col  */}
 
