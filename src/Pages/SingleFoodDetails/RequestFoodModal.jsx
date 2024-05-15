@@ -3,11 +3,13 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const RequestFoodModal = ({ id }) => {
   const { user } = useContext(AuthContext);
   const [foodData, setFoodData] = useState({});
   const [isDisabled, setIsDisabled] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getSingleFoodData();
@@ -66,6 +68,7 @@ const RequestFoodModal = ({ id }) => {
       console.log(data);
       if (data.insertedId) {
         toast.success("Food Requested");
+        navigate("my-food-requests");
       }
     } catch (error) {
       console.log("Error from posting food to requested foods collection", error);
