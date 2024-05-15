@@ -2,6 +2,8 @@ import axios from "axios";
 import { useContext } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
+import PageHeader from "../../Components/PageHeader";
+import { Link } from "react-router-dom";
 
 const ManageMyFoods = () => {
   const { user } = useContext(AuthContext);
@@ -44,6 +46,7 @@ const ManageMyFoods = () => {
 
   return (
     <div className="container mx-auto">
+      <PageHeader pageTitle={"Manage Your Foods"}></PageHeader>
       <div className="flex flex-col my-10">
         <div className="-m-1.5 overflow-x-auto">
           <div className="p-1.5 min-w-full inline-block align-middle">
@@ -66,7 +69,7 @@ const ManageMyFoods = () => {
                     <th scope="col" className="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-400">
                       Status
                     </th>
-                    <th scope="col" className="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase dark:text-neutral-400">
+                    <th scope="col" className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase dark:text-neutral-400">
                       Action
                     </th>
                   </tr>
@@ -81,20 +84,21 @@ const ManageMyFoods = () => {
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">{data.expire_date}</td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">{data.pickup_location}</td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">{data.food_status}</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
+                      <td className="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
                         <div className="space-x-5">
                           <button
                             type="button"
-                            className="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400"
+                            className="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-red-600 text-white px-4 py-1 transition-all hover:bg-red-500 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400"
                           >
                             Delete
                           </button>
-                          <button
+                          <Link
+                            to={`/update-your-food/${data._id}`}
                             type="button"
-                            className="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400"
+                            className="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent px-4 py-1 bg-primary text-white transition-all hover:bg-green-500 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400"
                           >
                             Update
-                          </button>
+                          </Link>
                         </div>
                       </td>
                     </tr>

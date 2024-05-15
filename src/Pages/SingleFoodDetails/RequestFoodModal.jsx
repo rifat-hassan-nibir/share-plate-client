@@ -71,7 +71,7 @@ const RequestFoodModal = ({ id }) => {
         navigate("/my-food-requests");
       }
     } catch (error) {
-      console.log("Error from posting food to requested foods collection", error);
+      toast.error(error.message);
     }
 
     // Close modal after request
