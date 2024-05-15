@@ -43,10 +43,9 @@ const AvailableFoods = () => {
   }
 
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto px-4 lg:px-0">
       {/* Page Title */}
       <PageHeader pageTitle={"Available Foods"}></PageHeader>
-      <Gap></Gap>
 
       {/* Available Foods Grid */}
       <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-[32px]">

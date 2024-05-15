@@ -45,7 +45,6 @@ const UpdateYourFood = () => {
 
   return (
     <div className="bg-secondary">
-      {/* Hire Us */}
       <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto ">
         <div className="max-w-3xl mx-auto bg-white lg:p-10 p-5 rounded-lg">
           <div className="text-center">
@@ -215,7 +214,6 @@ const UpdateYourFood = () => {
           </div>
         </div>
       </div>
-      {/* End Hire Us  */}
     </div>
   );
 };

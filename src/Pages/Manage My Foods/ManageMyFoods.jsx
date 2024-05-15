@@ -4,16 +4,18 @@ import { AuthContext } from "../../Providers/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
 import PageHeader from "../../Components/PageHeader";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const ManageMyFoods = () => {
   const { user } = useContext(AuthContext);
 
+  // Load data using user email
   const getFoodsDataByEmail = async () => {
     try {
       const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/foods/my-foods/${user.email}`);
       return data;
     } catch (error) {
-      console.log(error);
+      toast.error(error.message);
     }
   };
 
@@ -23,6 +25,7 @@ const ManageMyFoods = () => {
     isPending,
     isError,
     error,
+    refetch,
   } = useQuery({ queryKey: ["foodsDataByEmail"], queryFn: () => getFoodsDataByEmail() });
 
   // Show loader when data is in loading state
@@ -44,8 +47,20 @@ const ManageMyFoods = () => {
     );
   }
 
+  const deleteFood = async (id) => {
+    try {
+      const { data } = await axios.delete(`${import.meta.env.VITE_API_URL}/delete-food/${id}`);
+      if (data.deletedCount > 0) {
+        toast.success("Food deleted");
+        refetch();
+      }
+    } catch (error) {
+      toast(error.message);
+    }
+  };
+
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto px-4 lg:px-0">
       <PageHeader pageTitle={"Manage Your Foods"}></PageHeader>
       <div className="flex flex-col my-10">
         <div className="-m-1.5 overflow-x-auto">
@@ -88,6 +103,7 @@ const ManageMyFoods = () => {
                         <div className="space-x-5">
                           <button
                             type="button"
+                            onClick={() => deleteFood(data._id)}
                             className="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-red-600 text-white px-4 py-1 transition-all hover:bg-red-500 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400"
                           >
                             Delete

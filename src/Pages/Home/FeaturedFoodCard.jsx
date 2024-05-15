@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 
 const FeaturedFoodCard = ({ food }) => {
   const { _id, food_image, food_name, food_quantity, expire_date, additional_note, pickup_location, food_status, donator_details } = food;
+
   return (
     <Link to={`/food-details/${_id}`}>
       <div className="max-w-2xl overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
