@@ -18,7 +18,7 @@ const RequestFoodModal = ({ id }) => {
     setFoodData(data);
   };
 
-  const { _id, food_name, food_image, food_quantity, pickup_location, expire_date, food_status, donator_details } = foodData;
+  const { _id, food_name, food_image, pickup_location, expire_date, donator_details } = foodData;
 
   // Updating additional_note field value
   const handleNoteValueChange = async (e) => {
@@ -35,11 +35,33 @@ const RequestFoodModal = ({ id }) => {
     e.preventDefault();
     const form = e.target;
 
-    if (donator_details.email === user.email) return toast.error("Donator cannot request his own added food");
-    const newAdditionalNote = form.additional_note.value;
+    const food_id = _id;
+    const food_name = form.food_name.value;
+    const food_image = form.food_image.value;
+    const pickup_location = form.pickup_location.value;
+    const donor_name = form.donor_name.value;
+    const donor_email = form.donor_email.value;
+    const request_date = form.request_date.value;
+    const user_email = form.user_email.value;
+    const additional_note = form.additional_note.value;
+    const food_status = "Requested";
 
-    console.log(newAdditionalNote);
-    console.log("form submitted");
+    const requestedFoodData = {
+      food_id,
+      food_name,
+      food_image,
+      pickup_location,
+      donor_name,
+      donor_email,
+      request_date,
+      user_email,
+      additional_note,
+      food_status,
+    };
+
+    if (donator_details.email === user.email) return toast.error("Donator cannot request his own added food");
+
+    console.table(requestedFoodData);
   };
 
   return (
@@ -68,6 +90,7 @@ const RequestFoodModal = ({ id }) => {
                       type="text"
                       id="food-name"
                       defaultValue={food_name}
+                      name="food_name"
                       disabled
                       className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                     />
@@ -81,6 +104,7 @@ const RequestFoodModal = ({ id }) => {
                       type="text"
                       id="food-image"
                       defaultValue={food_image}
+                      name="food_image"
                       disabled
                       className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm  focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                       //   {...register("food_image", { required: true })}
@@ -105,48 +129,6 @@ const RequestFoodModal = ({ id }) => {
                     />
                   </div>
 
-                  <div>
-                    <label htmlFor="request-date" className="block mb-2 text-sm text-gray-700 font-medium dark:text-white">
-                      Request Date
-                    </label>
-                    <input
-                      type="text"
-                      id="request-date"
-                      defaultValue={new Date().toLocaleDateString()}
-                      disabled
-                      className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm  focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                    />
-                  </div>
-                </div>
-
-                {/* Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
-                  <div>
-                    <label htmlFor="donator-name" className="block mb-2 text-sm text-gray-700 font-medium dark:text-white">
-                      Donator Name
-                    </label>
-                    <input
-                      type="text"
-                      id="donator-name"
-                      defaultValue={donator_details?.name}
-                      disabled
-                      className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm  focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="donator-email" className="block mb-2 text-sm text-gray-700 font-medium dark:text-white">
-                      Donator Email
-                    </label>
-                    <input
-                      type="email"
-                      id="donator-email"
-                      defaultValue={donator_details?.email}
-                      disabled
-                      className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm  focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                    />
-                  </div>
-
                   {/* Pickupt Location */}
                   <div>
                     <label htmlFor="pickup-location" className="block mb-2 text-sm text-gray-700 font-medium dark:text-white">
@@ -156,13 +138,75 @@ const RequestFoodModal = ({ id }) => {
                       type="text"
                       id="pickup-location"
                       defaultValue={pickup_location}
+                      name="pickup_location"
+                      disabled
+                      className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm  focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                    />
+                  </div>
+                </div>
+
+                {/* Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
+                  <div>
+                    <label htmlFor="donor-name" className="block mb-2 text-sm text-gray-700 font-medium dark:text-white">
+                      Donor Name
+                    </label>
+                    <input
+                      type="text"
+                      id="donor-name"
+                      defaultValue={donator_details?.name}
+                      name="donor_name"
+                      disabled
+                      className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm  focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="donator-email" className="block mb-2 text-sm text-gray-700 font-medium dark:text-white">
+                      Donor Email
+                    </label>
+                    <input
+                      type="email"
+                      id="donator-email"
+                      defaultValue={donator_details?.email}
+                      name="donor_email"
+                      disabled
+                      className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm  focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                    />
+                  </div>
+
+                  {/* Request Date */}
+                  <div>
+                    <label htmlFor="request-date" className="block mb-2 text-sm text-gray-700 font-medium dark:text-white">
+                      Expire Date
+                    </label>
+                    <input
+                      type="text"
+                      id="expire-date"
+                      defaultValue={expire_date}
+                      name="expire_date"
+                      disabled
+                      className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm  focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                    />
+                  </div>
+
+                  {/* Request Date */}
+                  <div>
+                    <label htmlFor="request-date" className="block mb-2 text-sm text-gray-700 font-medium dark:text-white">
+                      Request Date
+                    </label>
+                    <input
+                      type="text"
+                      id="request-date"
+                      defaultValue={new Date().toLocaleDateString()}
+                      name="request_date"
                       disabled
                       className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm  focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                     />
                   </div>
 
                   {/* Requester's Email */}
-                  <div>
+                  <div className="col-span-2">
                     <label htmlFor="user-email" className="block mb-2 text-sm text-gray-700 font-medium dark:text-white">
                       User Email
                     </label>
@@ -170,6 +214,7 @@ const RequestFoodModal = ({ id }) => {
                       type="email"
                       id="user-email"
                       defaultValue={user?.email}
+                      name="user_email"
                       disabled
                       className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm  focus:border-primary focus:ring-primary disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                     />
