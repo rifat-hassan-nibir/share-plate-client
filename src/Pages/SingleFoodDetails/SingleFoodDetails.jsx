@@ -12,7 +12,7 @@ const SingleFoodDetails = () => {
       const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/foods/${id}`);
       return data;
     } catch (error) {
-      console.log(error);
+      console.log("Foods data fetch error", error);
     }
   };
 

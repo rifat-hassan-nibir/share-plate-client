@@ -68,7 +68,7 @@ const RequestFoodModal = ({ id }) => {
       console.log(data);
       if (data.insertedId) {
         toast.success("Food Requested");
-        navigate("my-food-requests");
+        navigate("/my-food-requests");
       }
     } catch (error) {
       console.log("Error from posting food to requested foods collection", error);
