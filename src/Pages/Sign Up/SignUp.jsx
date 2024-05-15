@@ -190,8 +190,8 @@ const SignUp = () => {
                     <span className="absolute right-4 hover:cursor-pointer" onClick={() => setShowPassword(!showPassword)}>
                       {showPassword ? <IoIosEyeOff /> : <IoIosEye />}
                     </span>
-                    {errors.password && <span className="text-red-600">This field is required</span>}
                   </div>
+                  {errors.password && <span className="text-red-600">This field is required</span>}
                 </div>
                 {/* End Form Group */}
 
