@@ -11,6 +11,7 @@ const RequestFoodModal = ({ id }) => {
 
   useEffect(() => {
     getSingleFoodData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getSingleFoodData = async () => {
@@ -31,14 +32,11 @@ const RequestFoodModal = ({ id }) => {
   };
 
   // Form submit function
-  const handleFoodRequest = (e) => {
+  const handleFoodRequest = async (e) => {
     e.preventDefault();
     const form = e.target;
 
     const food_id = _id;
-    const food_name = form.food_name.value;
-    const food_image = form.food_image.value;
-    const pickup_location = form.pickup_location.value;
     const donor_name = form.donor_name.value;
     const donor_email = form.donor_email.value;
     const request_date = form.request_date.value;
@@ -53,15 +51,28 @@ const RequestFoodModal = ({ id }) => {
       pickup_location,
       donor_name,
       donor_email,
+      expire_date,
       request_date,
       user_email,
       additional_note,
       food_status,
     };
 
-    if (donator_details.email === user.email) return toast.error("Donator cannot request his own added food");
+    if (donator_details.email === user?.email) return toast.error("Donator cannot request his own added food");
 
-    console.table(requestedFoodData);
+    // Add food to requested foods collection
+    try {
+      const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/requested-foods`, requestedFoodData);
+      console.log(data);
+      if (data.insertedId) {
+        toast.success("Food Requested");
+      }
+    } catch (error) {
+      console.log("Error from posting food to requested foods collection", error);
+    }
+
+    // Close modal after request
+    document.getElementById("my_modal_3").close();
   };
 
   return (
@@ -242,7 +253,6 @@ const RequestFoodModal = ({ id }) => {
               <div className="mt-6 grid">
                 <button
                   disabled={isDisabled}
-                  onClick={() => document.getElementById("my_modal_3").close()}
                   type="submit"
                   className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-primary text-white hover:bg-secondary hover:text-black hover:transition-all disabled:opacity-50 disabled:pointer-events-none"
                 >
