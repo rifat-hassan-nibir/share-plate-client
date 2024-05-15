@@ -6,6 +6,7 @@ import { AuthContext } from "../../Providers/AuthProvider";
 import { updateProfile } from "firebase/auth";
 import { IoIosEye } from "react-icons/io";
 import { IoIosEyeOff } from "react-icons/io";
+import { Helmet } from "react-helmet";
 
 const SignUp = () => {
   const { createUser, googleLogin } = useContext(AuthContext);
@@ -65,6 +66,10 @@ const SignUp = () => {
 
   return (
     <div className="max-w-md mx-auto lg:px-0 px-4 lg:my-[80px] my-[50px]">
+      <Helmet>
+        <title>Share Plate | Sign Up</title>
+      </Helmet>
+
       <div className="mt-7 bg-white border border-gray-200 rounded-xl shadow-sm dark:bg-neutral-900 dark:border-neutral-700">
         <div className="p-4 sm:p-7">
           <div className="text-center">

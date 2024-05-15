@@ -6,6 +6,7 @@ import PageHeader from "../../Components/PageHeader";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
 
 const ManageMyFoods = () => {
   const { user } = useContext(AuthContext);
@@ -79,7 +80,13 @@ const ManageMyFoods = () => {
 
   return (
     <div className="container mx-auto px-4 lg:px-0">
+      <Helmet>
+        <title>Share Plate | Manage My Foods</title>
+      </Helmet>
+
+      {/* Page title banner*/}
       <PageHeader pageTitle={"Manage Your Foods"}></PageHeader>
+
       <div className="flex flex-col my-10">
         <div className="-m-1.5 overflow-x-auto">
           <div className="p-1.5 min-w-full inline-block align-middle">

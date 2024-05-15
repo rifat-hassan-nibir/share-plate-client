@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { useLoaderData, useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const UpdateYourFood = () => {
   const { user } = useContext(AuthContext);
@@ -45,6 +46,10 @@ const UpdateYourFood = () => {
 
   return (
     <div className="bg-secondary">
+      <Helmet>
+        <title>Share Plate | Update Food Details</title>
+      </Helmet>
+
       <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto ">
         <div className="max-w-3xl mx-auto bg-white lg:p-10 p-5 rounded-lg">
           <div className="text-center">

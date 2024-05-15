@@ -4,6 +4,7 @@ import { AuthContext } from "../../Providers/AuthProvider";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const AddFood = () => {
   const { user } = useContext(AuthContext);
@@ -44,6 +45,10 @@ const AddFood = () => {
 
   return (
     <div className="bg-secondary">
+      <Helmet>
+        <title>Share Plate | Add Food</title>
+      </Helmet>
+
       <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto ">
         <div className="max-w-3xl mx-auto bg-white lg:p-10 p-5 rounded-lg">
           <div className="text-center">

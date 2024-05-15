@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import PageHeader from "../../Components/PageHeader";
+import { Helmet } from "react-helmet";
 
 const MyFoodRequests = () => {
   const { user } = useContext(AuthContext);
@@ -47,7 +48,13 @@ const MyFoodRequests = () => {
   console.log(requestedFoodsDataByEmail);
   return (
     <div className="container mx-auto px-4 lg:px-0">
+      <Helmet>
+        <title>Share Plate | My Food Requests</title>
+      </Helmet>
+
+      {/* Page title banner*/}
       <PageHeader pageTitle={"My Requsted Foods"}></PageHeader>
+
       <div className="flex flex-col my-10">
         <div className="-m-1.5 overflow-x-auto">
           <div className="p-1.5 min-w-full inline-block align-middle">

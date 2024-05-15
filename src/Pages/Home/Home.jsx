@@ -4,6 +4,7 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import Gap from "../../Components/Gap";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const Home = () => {
   // Get the food data using axios
@@ -40,6 +41,11 @@ const Home = () => {
 
   return (
     <div>
+      {/* Tab title */}
+      <Helmet>
+        <title>Share Plate | Home</title>
+      </Helmet>
+
       <Hero></Hero>
 
       <Gap></Gap>

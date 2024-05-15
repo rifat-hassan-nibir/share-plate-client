@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import RequestFoodModal from "./RequestFoodModal";
+import { Helmet } from "react-helmet";
 
 const SingleFoodDetails = () => {
   const { id } = useParams();
@@ -48,6 +49,9 @@ const SingleFoodDetails = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Share Plate | Food Details</title>
+      </Helmet>
       {/* Features  */}
       <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
         {/* Grid  */}

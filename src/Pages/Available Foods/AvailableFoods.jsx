@@ -3,6 +3,7 @@ import FeaturedFoodCard from "../Home/FeaturedFoodCard";
 import { useQuery } from "@tanstack/react-query";
 import PageHeader from "../../Components/PageHeader";
 import Gap from "../../Components/Gap";
+import { Helmet } from "react-helmet";
 
 const AvailableFoods = () => {
   // Get the data of available food using axios
@@ -44,6 +45,10 @@ const AvailableFoods = () => {
 
   return (
     <div className="container mx-auto px-4 lg:px-0">
+      <Helmet>
+        <title>Share Plate | Available Foods</title>
+      </Helmet>
+
       {/* Page Title */}
       <PageHeader pageTitle={"Available Foods"}></PageHeader>
 
