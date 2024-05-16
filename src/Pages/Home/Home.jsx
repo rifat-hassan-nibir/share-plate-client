@@ -62,11 +62,13 @@ const Home = () => {
             <span className="loading loading-spinner loading-lg "></span>
           </div>
         )}
+
         <div className="container mx-auto grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-[32px]">
           {featuredFoods.map((food, index) => (
             <FeaturedFoodCard food={food} key={index}></FeaturedFoodCard>
           ))}
         </div>
+
         <div className="flex justify-center">
           <Link
             to="/available-foods"

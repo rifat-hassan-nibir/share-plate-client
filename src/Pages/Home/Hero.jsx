@@ -1,3 +1,5 @@
+import Slider from "./Slider";
+
 const Hero = () => {
   return (
     <div className="lg:mt-[50px]">
@@ -13,17 +15,7 @@ const Hero = () => {
             </p>
           </div>
 
-          <div className="mt-10 relative max-w-5xl mx-auto">
-            <div className="w-full object-cover h-96 sm:h-[480px] bg-[url('https://images.unsplash.com/photo-1606868306217-dbf5046868d2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1981&q=80')] bg-no-repeat bg-center bg-cover rounded-xl"></div>
-
-            <div className="absolute bottom-12 -start-20 -z-[1] size-48 bg-gradient-to-b from-orange-500 to-white p-px rounded-lg dark:to-neutral-900">
-              <div className="bg-white size-48 rounded-lg dark:bg-neutral-900"></div>
-            </div>
-
-            <div className="absolute -top-12 -end-20 -z-[1] size-48 bg-gradient-to-t from-blue-600 to-cyan-400 p-px rounded-full">
-              <div className="bg-white size-48 rounded-full dark:bg-neutral-900"></div>
-            </div>
-          </div>
+          <Slider></Slider>
         </div>
       </div>
       {/* End Hero  */}
