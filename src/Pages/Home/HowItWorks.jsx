@@ -5,8 +5,8 @@ const HowItWorks = () => {
     <div className="bg-accent py-[50px] lg:py-[100px]">
       <div className="container px-4 lg:px-0 mx-auto">
         {/* Grid  */}
-        <div className="md:grid md:grid-cols-2 md:items-center md:gap-12 xl:gap-32">
-          <div className="mt-5 sm:mt-10 lg:mt-0">
+        <div className="grid lg:grid-cols-2 lg:items-center gap-12 lg:gap-32">
+          <div className="">
             <div className="space-y-6 sm:space-y-8">
               {/* Title  */}
               <div className="space-y-2 md:space-y-4">

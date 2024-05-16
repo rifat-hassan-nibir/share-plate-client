@@ -35,9 +35,11 @@ const FeaturedFoods = () => {
         transition={{ type: "twin", stiffness: 100, duration: 0.5 }}
         className="px-4 lg:px-0 lg:py-[100px] py-[50px]"
       >
-        <h1 className="font-bold text-3xl lg:text-4xl text-gray-800 dark:text-neutral-200 text-center lg:mb-[50px] mb-[25px]">
-          Featured Foods
-        </h1>
+        <div className="space-y-2 md:space-y-4 lg:mb-[50px] mb-[30px]">
+          <h1 className="font-bold text-3xl lg:text-4xl text-gray-800 dark:text-neutral-200 text-center">Featured Foods</h1>
+          <p className="text-gray-500 dark:text-neutral-50 text-center">Take a look at our featured foods sorted by quantities</p>
+        </div>
+
         {/* Show loader when data is still loading */}
         {featuredFoods.length === 0 && (
           <div className="text-center mt-[100px]">
