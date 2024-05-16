@@ -15,7 +15,7 @@ const ManageMyFoods = () => {
   // Load data using user email
   const getFoodsDataByEmail = async () => {
     try {
-      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/foods/my-foods/${user.email}`);
+      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/foods/my-foods/${user.email}`, { withCredentials: true });
       return data;
     } catch (error) {
       toast.error(error.message);
