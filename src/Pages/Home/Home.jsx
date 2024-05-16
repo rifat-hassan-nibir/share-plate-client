@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet";
 import { motion } from "framer-motion";
 import FeaturedFoods from "./FeaturedFoods";
 import HowItWorks from "./HowItWorks";
+import SubscribeToNewsLetter from "./SubscribeToNewsLetter";
 
 const Home = () => {
   return (
@@ -26,6 +27,8 @@ const Home = () => {
       <HowItWorks></HowItWorks>
 
       <FeaturedFoods></FeaturedFoods>
+
+      <SubscribeToNewsLetter></SubscribeToNewsLetter>
     </div>
   );
 };
