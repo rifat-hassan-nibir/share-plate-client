@@ -24,7 +24,6 @@ const MyFoodRequests = () => {
     data: requestedFoodsDataByEmail = [],
     isPending,
     isError,
-    error,
   } = useQuery({ queryKey: ["requestedFoodsDataByEmail"], queryFn: () => getRequestedFoodsDataByEmail() });
 
   // Show loader when data is in loading state
@@ -38,7 +37,6 @@ const MyFoodRequests = () => {
 
   // Show error
   if (isError) {
-    console.log(isError, error);
     return (
       <div className="flex justify-center items-center min-h-[calc(100vh-490px)]">
         <p className="text-center text-3xl font-bold">Something Went Wrong! Please Reload.</p>

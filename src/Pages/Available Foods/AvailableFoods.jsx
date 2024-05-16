@@ -24,15 +24,13 @@ const AvailableFoods = () => {
   };
 
   // Tanstack Query
-  const {
-    data: availableFoods = [],
-    isError,
-    error,
-  } = useQuery({ queryKey: ["availableFoods", sort, search], queryFn: () => getAvailableFoods() });
+  const { data: availableFoods = [], isError } = useQuery({
+    queryKey: ["availableFoods", sort, search],
+    queryFn: () => getAvailableFoods(),
+  });
 
   // Show error
   if (isError) {
-    console.log(isError, error);
     return (
       <div className="flex justify-center items-center min-h-[calc(100vh-490px)]">
         <p className="text-center text-3xl font-bold">Something Went Wrong! Please Reload.</p>

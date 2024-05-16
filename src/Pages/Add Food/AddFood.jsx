@@ -40,7 +40,7 @@ const AddFood = () => {
       if (data) toast.success("Food Added");
       navigate("/manage-my-foods");
     } catch (error) {
-      console.log(error);
+      toast.error(error.message);
     }
   };
 

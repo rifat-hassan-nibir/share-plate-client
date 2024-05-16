@@ -3,6 +3,7 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import toast from "react-hot-toast";
 
 const FeaturedFoods = () => {
   // Get the food data using axios
@@ -11,16 +12,15 @@ const FeaturedFoods = () => {
       const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/foods?status=Available&quantity_sort=Descending&limit=6`);
       return data;
     } catch (error) {
-      console.log(error);
+      toast.error(error.message);
     }
   };
 
   // Tanstack Query
-  const { data: featuredFoods = [], isError, error } = useQuery({ queryKey: ["featuredFoods"], queryFn: () => getFoodData() });
+  const { data: featuredFoods = [], isError } = useQuery({ queryKey: ["featuredFoods"], queryFn: () => getFoodData() });
 
   // Show error
   if (isError) {
-    console.log(isError, error);
     return (
       <div className="flex justify-center items-center min-h-[calc(100vh-490px)]">
         <p className="text-center text-3xl font-bold">Something Went Wrong! Please Reload.</p>

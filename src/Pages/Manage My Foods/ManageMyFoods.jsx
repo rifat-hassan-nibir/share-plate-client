@@ -27,7 +27,6 @@ const ManageMyFoods = () => {
     data: foodsDataByEmail = [],
     isPending,
     isError,
-    error,
     refetch,
   } = useQuery({ queryKey: ["foodsDataByEmail"], queryFn: () => getFoodsDataByEmail() });
 
@@ -42,7 +41,6 @@ const ManageMyFoods = () => {
 
   // Show error
   if (isError) {
-    console.log(isError, error);
     return (
       <div className="flex justify-center items-center min-h-[calc(100vh-490px)]">
         <p className="text-center text-3xl font-bold">Something Went Wrong! Please Reload.</p>

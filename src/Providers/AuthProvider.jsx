@@ -59,7 +59,7 @@ const AuthProvider = ({ children }) => {
           // console.log("token response", data.data);
         });
       } else {
-        axios.post(`${import.meta.env.VITE_API_URL}/logout`, loggedUser, { withCredentials: true }).then((data) => console.log(data.data));
+        axios.post(`${import.meta.env.VITE_API_URL}/logout`, loggedUser, { withCredentials: true }).then((data) => console.log("success"));
       }
     });
 

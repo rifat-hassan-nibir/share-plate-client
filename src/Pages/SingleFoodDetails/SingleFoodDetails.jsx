@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import RequestFoodModal from "./RequestFoodModal";
 import { Helmet } from "react-helmet";
 import { motion } from "framer-motion";
+import toast from "react-hot-toast";
 
 const SingleFoodDetails = () => {
   const { id } = useParams();
@@ -14,17 +15,12 @@ const SingleFoodDetails = () => {
       const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/foods/${id}`);
       return data;
     } catch (error) {
-      console.log("Foods data fetch error", error);
+      toast.error(error.message);
     }
   };
 
   //   Tanstack Query for loading single food data
-  const {
-    data: singleFoodData = {},
-    isPending,
-    isError,
-    error,
-  } = useQuery({ queryKey: ["singleFoodData"], queryFn: () => getSingleFoodData() });
+  const { data: singleFoodData = {}, isPending, isError } = useQuery({ queryKey: ["singleFoodData"], queryFn: () => getSingleFoodData() });
 
   // Show loader when data is in loading state
   if (isPending) {
@@ -37,7 +33,6 @@ const SingleFoodDetails = () => {
 
   // Show error
   if (isError) {
-    console.log(isError, error);
     return (
       <div className="flex justify-center items-center min-h-[calc(100vh-490px)]">
         <p className="text-center text-3xl font-bold">Something Went Wrong! Please Reload.</p>

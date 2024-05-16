@@ -65,7 +65,6 @@ const RequestFoodModal = ({ id }) => {
     // Add food to requested foods collection
     try {
       const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/requested-foods`, requestedFoodData);
-      console.log(data);
       if (data.insertedId) {
         toast.success("Food Requested");
         navigate("/my-food-requests");

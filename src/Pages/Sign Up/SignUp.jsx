@@ -46,8 +46,7 @@ const SignUp = () => {
         });
       })
       .catch((error) => {
-        console.log(error);
-        toast.error("Error");
+        toast.error(error.message);
       });
   };
 
@@ -55,13 +54,12 @@ const SignUp = () => {
   const handleGoogleSignUp = () => {
     googleLogin()
       .then((result) => {
-        console.log(result.user);
+        // console.log(result.user);
         toast.success("Google Login Successful");
         navigate("/");
       })
       .catch((error) => {
-        console.log(error);
-        toast.error("Error");
+        toast.error(error.message);
       });
   };
 
