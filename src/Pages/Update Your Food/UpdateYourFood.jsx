@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import { motion } from "framer-motion";
 
 const UpdateYourFood = () => {
   const { user } = useContext(AuthContext);
@@ -45,7 +46,12 @@ const UpdateYourFood = () => {
   };
 
   return (
-    <div className="bg-secondary">
+    <motion.div
+      initial={{ scale: 0.5, opacity: 0 }}
+      whileInView={{ scale: 1, opacity: 1 }}
+      transition={{ type: "twin", stiffness: 100, duration: 0.5 }}
+      className="bg-secondary"
+    >
       <Helmet>
         <title>Share Plate | Update Food Details</title>
       </Helmet>
@@ -219,7 +225,7 @@ const UpdateYourFood = () => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

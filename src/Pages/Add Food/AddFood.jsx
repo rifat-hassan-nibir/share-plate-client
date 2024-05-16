@@ -5,6 +5,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import { motion } from "framer-motion";
 
 const AddFood = () => {
   const { user } = useContext(AuthContext);
@@ -44,7 +45,12 @@ const AddFood = () => {
   };
 
   return (
-    <div className="bg-accent">
+    <motion.div
+      initial={{ scale: 0.5, opacity: 0 }}
+      whileInView={{ scale: 1, opacity: 1 }}
+      transition={{ type: "twin", stiffness: 100, duration: 0.5 }}
+      className="bg-accent"
+    >
       <Helmet>
         <title>Share Plate | Add Food</title>
       </Helmet>
@@ -212,7 +218,7 @@ const AddFood = () => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

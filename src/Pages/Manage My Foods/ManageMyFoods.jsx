@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet";
+import { motion } from "framer-motion";
 
 const ManageMyFoods = () => {
   const { user } = useContext(AuthContext);
@@ -79,7 +80,12 @@ const ManageMyFoods = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 lg:px-0">
+    <motion.div
+      initial={{ scale: 0.5, opacity: 0 }}
+      whileInView={{ scale: 1, opacity: 1 }}
+      transition={{ type: "twin", stiffness: 100, duration: 0.5 }}
+      className="container mx-auto px-4 lg:px-0"
+    >
       <Helmet>
         <title>Share Plate | Manage My Foods</title>
       </Helmet>
@@ -150,7 +156,7 @@ const ManageMyFoods = () => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

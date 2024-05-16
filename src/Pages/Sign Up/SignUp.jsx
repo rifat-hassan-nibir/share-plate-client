@@ -7,6 +7,7 @@ import { updateProfile } from "firebase/auth";
 import { IoIosEye } from "react-icons/io";
 import { IoIosEyeOff } from "react-icons/io";
 import { Helmet } from "react-helmet";
+import { motion } from "framer-motion";
 
 const SignUp = () => {
   const { createUser, googleLogin } = useContext(AuthContext);
@@ -65,7 +66,12 @@ const SignUp = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto lg:px-0 px-4 lg:my-[80px] my-[50px]">
+    <motion.div
+      initial={{ scale: 0.5, opacity: 0 }}
+      whileInView={{ scale: 1, opacity: 1 }}
+      transition={{ type: "twin", stiffness: 100, duration: 0.5 }}
+      className="max-w-md mx-auto lg:px-0 px-4 lg:my-[80px] my-[50px]"
+    >
       <Helmet>
         <title>Share Plate | Sign Up</title>
       </Helmet>
@@ -207,7 +213,7 @@ const SignUp = () => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -6,6 +6,7 @@ import Gap from "../../Components/Gap";
 import { Helmet } from "react-helmet";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { motion } from "framer-motion";
 
 const AvailableFoods = () => {
   const [sort, setSort] = useState("");
@@ -55,7 +56,12 @@ const AvailableFoods = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 lg:px-0">
+    <motion.div
+      initial={{ scale: 0.5, opacity: 0 }}
+      whileInView={{ scale: 1, opacity: 1 }}
+      transition={{ type: "twin", stiffness: 100, duration: 0.5 }}
+      className="container mx-auto px-4 lg:px-0"
+    >
       <Helmet>
         <title>Share Plate | Available Foods</title>
       </Helmet>
@@ -152,7 +158,7 @@ const AvailableFoods = () => {
       </div>
 
       <Gap></Gap>
-    </div>
+    </motion.div>
   );
 };
 

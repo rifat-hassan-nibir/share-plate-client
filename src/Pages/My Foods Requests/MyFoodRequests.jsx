@@ -5,6 +5,7 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import PageHeader from "../../Components/PageHeader";
 import { Helmet } from "react-helmet";
+import { motion } from "framer-motion";
 
 const MyFoodRequests = () => {
   const { user } = useContext(AuthContext);
@@ -45,9 +46,13 @@ const MyFoodRequests = () => {
     );
   }
 
-  console.log(requestedFoodsDataByEmail);
   return (
-    <div className="container mx-auto px-4 lg:px-0">
+    <motion.div
+      initial={{ scale: 0.5, opacity: 0 }}
+      whileInView={{ scale: 1, opacity: 1 }}
+      transition={{ type: "twin", stiffness: 100, duration: 0.5 }}
+      className="container mx-auto px-4 lg:px-0"
+    >
       <Helmet>
         <title>Share Plate | My Food Requests</title>
       </Helmet>
@@ -105,7 +110,7 @@ const MyFoodRequests = () => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

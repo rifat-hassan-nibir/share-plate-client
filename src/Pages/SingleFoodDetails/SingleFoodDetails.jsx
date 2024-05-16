@@ -3,6 +3,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import RequestFoodModal from "./RequestFoodModal";
 import { Helmet } from "react-helmet";
+import { motion } from "framer-motion";
 
 const SingleFoodDetails = () => {
   const { id } = useParams();
@@ -48,7 +49,11 @@ const SingleFoodDetails = () => {
   const { food_image, food_name, food_quantity, expire_date, pickup_location, donator_details } = singleFoodData;
 
   return (
-    <div>
+    <motion.div
+      initial={{ scale: 0.5, opacity: 0 }}
+      whileInView={{ scale: 1, opacity: 1 }}
+      transition={{ type: "twin", stiffness: 100, duration: 0.5 }}
+    >
       <Helmet>
         <title>Share Plate | Food Details</title>
       </Helmet>
@@ -117,7 +122,7 @@ const SingleFoodDetails = () => {
         {/* End Grid  */}
       </div>
       {/* End Features  */}
-    </div>
+    </motion.div>
   );
 };
 

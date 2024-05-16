@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import { IoIosEye } from "react-icons/io";
 import { IoIosEyeOff } from "react-icons/io";
 import { Helmet } from "react-helmet";
+import { motion } from "framer-motion";
 
 const SignIn = () => {
   const { loginUser, googleLogin } = useContext(AuthContext);
@@ -48,7 +49,12 @@ const SignIn = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto lg:px-0 px-4 lg:my-[80px] my-[50px]">
+    <motion.div
+      initial={{ scale: 0.5, opacity: 0 }}
+      whileInView={{ scale: 1, opacity: 1 }}
+      transition={{ type: "twin", stiffness: 100, duration: 0.5 }}
+      className="max-w-md mx-auto lg:px-0 px-4 lg:my-[80px] my-[50px]"
+    >
       <Helmet>
         <title>Share Plate | Sign In</title>
       </Helmet>
@@ -155,7 +161,7 @@ const SignIn = () => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
