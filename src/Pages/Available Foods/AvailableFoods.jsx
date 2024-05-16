@@ -5,17 +5,19 @@ import PageHeader from "../../Components/PageHeader";
 import Gap from "../../Components/Gap";
 import { Helmet } from "react-helmet";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 const AvailableFoods = () => {
   const [sort, setSort] = useState("");
-  console.log(sort);
+  const [search, setSearch] = useState("");
+
   // Get the data of available food using axios
   const getAvailableFoods = async () => {
     try {
-      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/foods?status=Available&date_sort=${sort}`);
+      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/foods?status=Available&date_sort=${sort}&search=${search}`);
       return data;
     } catch (error) {
-      console.log(error);
+      toast.error(error.message);
     }
   };
 
@@ -24,7 +26,7 @@ const AvailableFoods = () => {
     data: availableFoods = [],
     isError,
     error,
-  } = useQuery({ queryKey: ["availableFoods", sort], queryFn: () => getAvailableFoods() });
+  } = useQuery({ queryKey: ["availableFoods", sort, search], queryFn: () => getAvailableFoods() });
 
   // Show error
   if (isError) {
@@ -36,8 +38,15 @@ const AvailableFoods = () => {
     );
   }
 
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const searchText = e.target.search.value;
+    setSearch(searchText);
+  };
+
   const handleReset = () => {
     setSort("");
+    setSearch("");
   };
 
   return (
@@ -63,7 +72,7 @@ const AvailableFoods = () => {
         {/* Search Field */}
         <div className="lg:col-span-7 relative">
           {/* Form  */}
-          <form>
+          <form onSubmit={handleSearch}>
             <div className="relative z-10 flex space-x-3 p-[5px] bg-white border rounded-lg shadow-lg shadow-gray-100 dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-gray-900/20">
               <div className="flex-[1_0_0%] ">
                 <label htmlFor="hs-search-article-1" className="block text-sm text-gray-700 font-medium dark:text-white">
@@ -71,7 +80,7 @@ const AvailableFoods = () => {
                 </label>
                 <input
                   type="text"
-                  name="hs-search-article-1"
+                  name="search"
                   id="hs-search-article-1"
                   className="py-2.5 px-4 block w-full border-transparent rounded-lg focus:border-green-500 focus:ring-blue-500 dark:bg-neutral-900 dark:border-transparent dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                   placeholder="Search article"
@@ -79,6 +88,7 @@ const AvailableFoods = () => {
               </div>
               <div className="flex-[0_0_auto] ">
                 <button
+                  type="submit"
                   className="size-[46px] inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-primary text-white transition-all hover:bg-secondary disabled:opacity-50 disabled:pointer-events-none"
                   href="#"
                 >
@@ -113,6 +123,13 @@ const AvailableFoods = () => {
           Reset
         </button>
       </div>
+
+      {/* Show loader when data is still loading */}
+      {availableFoods.length === 0 && (
+        <div className="text-center mt-[100px]">
+          <span className="loading loading-spinner loading-lg "></span>
+        </div>
+      )}
 
       {/* Available Foods Grid */}
       <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-[32px] ">
