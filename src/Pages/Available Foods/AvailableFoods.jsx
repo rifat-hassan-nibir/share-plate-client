@@ -58,7 +58,7 @@ const AvailableFoods = () => {
       {/* Page Title */}
       <PageHeader pageTitle={"Available Foods"}></PageHeader>
 
-      <div className="grid lg:grid-cols-12 items-center my-10 gap-10">
+      <div className="grid lg:grid-cols-12 items-center my-10 lg:gap-10 gap-4">
         {/* Sorting Functinality */}
         <select
           onChange={(e) => setSort(e.target.value)}
@@ -132,7 +132,7 @@ const AvailableFoods = () => {
       )}
 
       {/* Available Foods Grid */}
-      <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-[32px] ">
+      <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 lg:gap-[32px]">
         {availableFoods.map((food) => (
           <FeaturedFoodCard food={food} key={food._id}></FeaturedFoodCard>
         ))}
