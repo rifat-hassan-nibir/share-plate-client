@@ -8,7 +8,7 @@ const MainLayout = () => {
       <ScrollRestoration></ScrollRestoration>
 
       {/* Navbar */}
-      <div className="shadow-md bg-accent">
+      <div className="shadow-lg shadow-gray-100 bg-accent">
         <Navbar></Navbar>
       </div>
 

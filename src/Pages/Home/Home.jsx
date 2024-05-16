@@ -10,7 +10,7 @@ const Home = () => {
   // Get the food data using axios
   const getFoodData = async () => {
     try {
-      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/foods?status=Available&sort=descending&limit=6`);
+      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/foods?status=Available&quantity_sort=Descending&limit=6`);
       return data;
     } catch (error) {
       console.log(error);
