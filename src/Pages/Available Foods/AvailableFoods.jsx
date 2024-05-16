@@ -10,6 +10,7 @@ import toast from "react-hot-toast";
 const AvailableFoods = () => {
   const [sort, setSort] = useState("");
   const [search, setSearch] = useState("");
+  const [isTwoCol, setIsTwoCol] = useState(true);
 
   // Get the data of available food using axios
   const getAvailableFoods = async () => {
@@ -49,6 +50,10 @@ const AvailableFoods = () => {
     setSearch("");
   };
 
+  const handleTwoCol = () => {
+    setIsTwoCol(!isTwoCol);
+  };
+
   return (
     <div className="container mx-auto px-4 lg:px-0">
       <Helmet>
@@ -58,11 +63,11 @@ const AvailableFoods = () => {
       {/* Page Title */}
       <PageHeader pageTitle={"Available Foods"}></PageHeader>
 
-      <div className="grid lg:grid-cols-12 items-center my-10 lg:gap-10 gap-4">
+      <div className={`grid lg:grid-cols-12 items-center my-10 lg:gap-10 gap-4`}>
         {/* Sorting Functinality */}
         <select
           onChange={(e) => setSort(e.target.value)}
-          className="shadow-lg shadow-gray-100 lg:col-span-3 py-4 px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+          className="lg:col-span-3 shadow-lg shadow-gray-100  py-4 px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600`"
         >
           <option value="">Sort by date</option>
           <option>Latest</option>
@@ -70,7 +75,7 @@ const AvailableFoods = () => {
         </select>
 
         {/* Search Field */}
-        <div className="lg:col-span-7 relative">
+        <div className="lg:col-span-5 relative">
           {/* Form  */}
           <form onSubmit={handleSearch}>
             <div className="relative z-10 flex space-x-3 p-[5px] bg-white border rounded-lg shadow-lg shadow-gray-100 dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-gray-900/20">
@@ -118,9 +123,17 @@ const AvailableFoods = () => {
         {/* Reset Button */}
         <button
           onClick={handleReset}
-          className="lg:col-span-2 py-3  rounded-lg text-center shadow-lg shadow-gray-100 bg-primary text-white "
+          className="lg:col-span-2 py-3 rounded-lg text-center shadow-lg shadow-gray-100 bg-primary text-white "
         >
           Reset
+        </button>
+
+        {/* Layout change button */}
+        <button
+          onClick={handleTwoCol}
+          className="lg:col-span-2 hidden lg:block py-3 rounded-lg text-center shadow-lg shadow-gray-100 bg-primary text-white "
+        >
+          Change Layout
         </button>
       </div>
 
@@ -132,7 +145,7 @@ const AvailableFoods = () => {
       )}
 
       {/* Available Foods Grid */}
-      <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 lg:gap-[32px]">
+      <div className={`grid ${isTwoCol ? "lg:grid-cols-3" : "lg:grid-cols-2"} md:grid-cols-2 grid-cols-1 lg:gap-[32px]`}>
         {availableFoods.map((food) => (
           <FeaturedFoodCard food={food} key={food._id}></FeaturedFoodCard>
         ))}
