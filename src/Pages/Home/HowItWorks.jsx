@@ -1,8 +1,14 @@
 import sharingFood from "../../assets/sharing-food.jpg";
+import { motion } from "framer-motion";
 
 const HowItWorks = () => {
   return (
-    <div className="bg-accent py-[50px] lg:py-[100px]">
+    <motion.div
+      initial={{ scale: 0.5, opacity: 0 }}
+      whileInView={{ scale: 1, opacity: 1 }}
+      transition={{ type: "twin", stiffness: 100, duration: 0.5 }}
+      className="bg-accent py-[50px] lg:py-[100px]"
+    >
       <div className="container px-4 lg:px-0 mx-auto">
         {/* Grid  */}
         <div className="grid lg:grid-cols-2 lg:items-center gap-12 lg:gap-32">
@@ -107,7 +113,7 @@ const HowItWorks = () => {
         </div>
         {/* End Grid  */}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

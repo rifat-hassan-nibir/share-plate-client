@@ -1,6 +1,13 @@
+import { motion } from "framer-motion";
+
 const SubscribeToNewsLetter = () => {
   return (
-    <div className="bg-primary">
+    <motion.div
+      initial={{ scale: 0.5, opacity: 0 }}
+      whileInView={{ scale: 1, opacity: 1 }}
+      transition={{ type: "twin", stiffness: 100, duration: 0.5 }}
+      className="bg-primary"
+    >
       <div className="max-w-6xl py-10 px-4 sm:px-6 lg:px-8 lg:py-16 mx-auto">
         <div className="max-w-xl text-center mx-auto">
           <div className="mb-5">
@@ -31,7 +38,7 @@ const SubscribeToNewsLetter = () => {
           </form>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
