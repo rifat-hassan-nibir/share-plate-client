@@ -49,6 +49,7 @@ const AvailableFoods = () => {
   const handleReset = () => {
     setSort("");
     setSearch("");
+    setIsTwoCol(true);
   };
 
   const handleTwoCol = () => {
@@ -94,7 +95,7 @@ const AvailableFoods = () => {
                   name="search"
                   id="hs-search-article-1"
                   className="py-2.5 px-4 block w-full border-transparent rounded-lg focus:border-green-500 focus:ring-blue-500 dark:bg-neutral-900 dark:border-transparent dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                  placeholder="Search article"
+                  placeholder="Search food"
                 />
               </div>
               <div className="flex-[0_0_auto] ">
@@ -126,20 +127,20 @@ const AvailableFoods = () => {
         </div>
         {/* End of Search field  */}
 
-        {/* Reset Button */}
-        <button
-          onClick={handleReset}
-          className="lg:col-span-2 py-3 rounded-lg text-center shadow-lg shadow-gray-100 bg-primary text-white "
-        >
-          Reset
-        </button>
-
         {/* Layout change button */}
         <button
           onClick={handleTwoCol}
           className="lg:col-span-2 hidden lg:block py-3 rounded-lg text-center shadow-lg shadow-gray-100 bg-primary text-white "
         >
           Change Layout
+        </button>
+
+        {/* Reset Button */}
+        <button
+          onClick={handleReset}
+          className="lg:col-span-2 py-3 rounded-lg text-center shadow-lg shadow-gray-100 bg-primary text-white "
+        >
+          Reset
         </button>
       </div>
 
