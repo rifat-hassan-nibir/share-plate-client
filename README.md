@@ -1,8 +1,26 @@
-# React + Vite
+# Shate Plate
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Community food sharing and surplus reduction platform.
 
-Currently, two official plugins are available:
+Live Site:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [https://share-plate-38a2e.web.app/](https://share-plate-38a2e.web.app/)
+
+Key Features:
+
+- Featured food section has the available food sorted by quantity form highest to lowest
+- Users can request for food
+- Users can add new food item in Add Food page
+- Users can see all the items they have added in the Manage My Foods page
+- Users can update or delete the items they have added in Manage My Foods page
+- All avalable foods are shown int the Available Foods page
+- All Available foods page has sorting, searching, change layout and reset functionality
+
+NPM packages used:
+
+- Framer Motion
+- React Hook Form
+- Tanstack Query
+- Swiper Slider
+- Sweet Alert 2
+- React Hot Toast
