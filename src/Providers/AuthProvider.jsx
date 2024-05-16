@@ -10,6 +10,7 @@ import {
   signOut,
 } from "firebase/auth";
 import app from "../Firebase/firebase.config";
+import axios from "axios";
 
 export const AuthContext = createContext();
 const auth = getAuth(app);
@@ -46,14 +47,26 @@ const AuthProvider = ({ children }) => {
   //   Observer
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+      const userEmail = currentUser?.email || user?.email;
+      const loggedUser = { email: userEmail };
+
       setUser(currentUser);
       setLoading(false);
+
+      // if user exists then issue a token
+      if (currentUser) {
+        axios.post(`${import.meta.env.VITE_API_URL}/jwt`, loggedUser, { withCredentials: true }).then((data) => {
+          console.log("token response", data.data);
+        });
+      } else {
+        axios.post(`${import.meta.env.VITE_API_URL}/logout`, loggedUser, { withCredentials: true }).then((data) => console.log(data.data));
+      }
     });
 
     return () => {
       return unSubscribe();
     };
-  }, []);
+  }, [user?.email]);
 
   const authInfo = { user, setUser, loading, createUser, loginUser, logOutUser, googleLogin };
 
