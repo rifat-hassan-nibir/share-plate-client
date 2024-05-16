@@ -44,13 +44,13 @@ const AddFood = () => {
   };
 
   return (
-    <div className="bg-secondary">
+    <div className="bg-accent">
       <Helmet>
         <title>Share Plate | Add Food</title>
       </Helmet>
 
       <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto ">
-        <div className="max-w-3xl mx-auto bg-white lg:p-10 p-5 rounded-lg">
+        <div className="max-w-3xl mx-auto bg-white lg:p-10 p-5 rounded-lg shadow-lg shadow-gray-100 ">
           <div className="text-center">
             <h1 className="text-3xl font-bold text-gray-800 sm:text-4xl dark:text-white">Want to donate food?</h1>
             <p className="mt-1 text-gray-600 dark:text-neutral-400">Fillup the form below</p>

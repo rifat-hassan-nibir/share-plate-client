@@ -12,5 +12,5 @@ export default {
     },
   },
   darkMode: "selector",
-  plugins: [require("daisyui"), require("@tailwindcss/forms"), require("preline/plugin")],
+  plugins: [require("daisyui"), require("@tailwindcss/forms"), require("preline/plugin"), require("@tailwindcss/forms")],
 };

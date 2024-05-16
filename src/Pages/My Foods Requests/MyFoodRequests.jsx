@@ -55,7 +55,7 @@ const MyFoodRequests = () => {
       {/* Page title banner*/}
       <PageHeader pageTitle={"My Requsted Foods"}></PageHeader>
 
-      <div className="flex flex-col my-10">
+      <div className="flex flex-col my-10 shadow-lg shadow-gray-100">
         <div className="-m-1.5 overflow-x-auto">
           <div className="p-1.5 min-w-full inline-block align-middle">
             <div className="border rounded-lg overflow-hidden dark:border-neutral-700">
