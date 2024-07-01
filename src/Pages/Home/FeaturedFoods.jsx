@@ -32,6 +32,7 @@ const FeaturedFoods = () => {
       <motion.div
         initial={{ scale: 0.5, opacity: 0 }}
         whileInView={{ scale: 1, opacity: 1 }}
+        viewport={{ once: true }}
         transition={{ type: "twin", stiffness: 100, duration: 0.5 }}
         className="px-4 lg:px-0 lg:py-[100px] py-[50px]"
       >

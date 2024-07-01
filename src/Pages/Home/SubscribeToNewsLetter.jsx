@@ -5,6 +5,7 @@ const SubscribeToNewsLetter = () => {
     <motion.div
       initial={{ scale: 0.5, opacity: 0 }}
       whileInView={{ scale: 1, opacity: 1 }}
+      viewport={{ once: true }}
       transition={{ type: "twin", stiffness: 100, duration: 0.5 }}
       className="bg-primary"
     >
