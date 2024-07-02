@@ -2,19 +2,16 @@
 
 Community food sharing and surplus reduction platform.
 
-Live Site:
+### Live Site:
+<p>https://share-plate-38a2e.web.app</p>
 
-- [https://share-plate-38a2e.web.app/](https://share-plate-38a2e.web.app/)
+### Server Repository
+<p>https://github.com/rifat-hassan-nibir/share-plate-server</p>
 
-Key Features:
-
-- Featured food section has the available food sorted by quantity form highest to lowest
-- Users can request for food
-- Users can add new food item in Add Food page
-- Users can see all the items they have added in the Manage My Foods page
-- Users can update or delete the items they have added in Manage My Foods page
-- All avalable foods are shown int the Available Foods page
-- All Available foods page has sorting, searching, change layout and reset functionality
+### Key Features:
+- Add, update, delete, and manage food items, with a dedicated page to showcase added items
+- All available foods can be sorted, searched, and customized in layout.
+- Users can request food and browse featured foods sorted by quantity.
 
 NPM packages used:
 
@@ -24,3 +21,9 @@ NPM packages used:
 - Swiper Slider
 - Sweet Alert 2
 - React Hot Toast
+
+### Steps for running this project locally
+- Clone the project
+- Make sure you have node.js installed. Then install the dependencies on the project root folder using "npm install" in the terminal
+- Replace the firebase config credentials in the firebase.config.js file with your own
+- Start the development server by using "npm run dev" in the terminal
