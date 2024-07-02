@@ -13,7 +13,7 @@ Community food sharing and surplus reduction platform.
 - All available foods can be sorted, searched, and customized in layout.
 - Users can request food and browse featured foods sorted by quantity.
 
-NPM packages used:
+### NPM packages used:
 
 - Framer Motion
 - React Hook Form
