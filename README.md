@@ -2,7 +2,7 @@
 
 A community food sharing and surplus reduction platform that allows users to share, request, manage, and browse food items.
 
-Share Plate addresses the issue of food waste and food insecurity by providing a platform where surplus food can be shared within the community, ensuring that excess food is redistributed to those in need instead of being wasted.
+Share Plate reduces food waste and addresses food insecurity by allowing community members to share and request surplus food.
 
 ### Live Site:
 <p>https://share-plate-38a2e.web.app</p>
