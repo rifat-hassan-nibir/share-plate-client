@@ -1,6 +1,6 @@
 # Shate Plate
 
-Community food sharing and surplus reduction platform.
+A community food sharing and surplus reduction platform that allows users to share, request, manage, and browse food items.
 
 ### Live Site:
 <p>https://share-plate-38a2e.web.app</p>
